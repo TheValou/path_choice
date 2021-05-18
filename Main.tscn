@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Ghost.tscn" type="PackedScene" id=1]
+[ext_resource path="res://background.png" type="Texture" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://assets/font-press_start_2p/PressStart2P_DynamicFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://fourche.tscn" type="PackedScene" id=5]
+[ext_resource path="res://aureole.tscn" type="PackedScene" id=6]
+[ext_resource path="res://CanvasLayer.gd" type="Script" id=7]
+[ext_resource path="res://enfer.png" type="Texture" id=8]
+[ext_resource path="res://paradis.png" type="Texture" id=9]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 20.9642, 26.0962, 0, 0, 0, 0, 272.68, 35.8352, 0, 0, 0, 0, 320.358, 280.334, 0, 0, 0, 0, 150.585, 149.835, 0, 0, 0, 0, 521.165, 204.933, 0, 0, 0, 0, 67.1679, 185.09, 0, 0, 0, 0, 91.7726, 307.32, 0, 0, 0, 0, 514.815, 62.8604, 0, 0, 0, 0, 249.977, 79.6263, 0, 0, 0, 0, 157.205, 94.977, 0, 0, 0, 0, 439.413, 298.589, 0, 0, 0, 0, 81.7868, 152.375, 0, 0, 0, 0, 31.7303, 161.719, 0, 0, 0, 0, 13.0425, 102.986, 0, 0, 0, 0, 29.728, 74.287, 0, 0, 0, 0, 51.0855, 112.33, 0, 0, 0, 0, 106.481, 85.6331, 0, 0, 0, 0, 187.907, 65.6105, 0, 0, 0, 0, 267.997, 82.296, 0, 0, 0, 0, 271.334, 61.606, 0, 0, 0, 0, 227.284, 44.9205, 0, 0, 0, 0, 146.527, 44.2531, 0, 0, 0, 0, 81.7868, 56.2666, 0, 0, 0, 0, 51.7529, 66.9454, 0, 0, 0, 0, 37.7371, 41.5834, 0, 0, 0, 0, 101.809, 70.9499, 0, 0, 0, 0, 114.49, 126.346, 0, 0, 0, 0, 221.945, 137.024, 0, 0, 0, 0, 175.893, 94.3096, 0, 0, 0, 0, 225.282, 60.9386, 0, 0, 0, 0, 371.949, 43.8116, 0, 0, 0, 0, 244.637, 142.364, 0, 0, 0, 0, 600.265, 331.952, 0, 0, 0, 0, 567.738, 227.301, 0, 0, 0, 0, 562.828, 52.2544, 0, 0, 0, 0, 478.643, 78.8082, 0, 0, 0, 0, 395.204, 177.803, 0, 0, 0, 0, 366.92, 141.034, 0, 0, 0, 0, 430.56, 40.6245, 0, 0, 0, 0, 495.613, 42.0387, 0, 0, 0, 0, 525.312, 97.193, 0, 0, 0, 0, 267.925, 232.957, 0, 0, 0, 0, 209.942, 190.531, 0, 0, 0, 0, 236.812, 167.904, 0, 0, 0, 0, 101.048, 228.715, 0, 0, 0, 0, 267.925, 264.07, 0, 0, 0, 0, 348.535, 285.283, 0, 0, 0, 0, 60.0357, 289.526, 0, 0, 0, 0, 23.5144, 225.569, 0, 0, 0, 0, 545.151, 134.279, 0, 0, 0, 0, 393.79, 234.372, 0, 0, 0, 0, 286.31, 247.1, 0, 0, 0, 0, 176.001, 105.678 )
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 3 )
+fourche = ExtResource( 5 )
+aureole = ExtResource( 6 )
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 320.76, 161.261 )
+scale = Vector2( 0.324561, 0.450069 )
+texture = ExtResource( 2 )
+
+[node name="Ghost" parent="." instance=ExtResource( 1 )]
+position = Vector2( 47.8506, 130.171 )
+scale = Vector2( 1, 1 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="appariton" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 20.9642, 26.0962 )
+rotation = 0.0386712
+
+[node name="ItemTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="GlobalTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 7 )
+
+[node name="ParadisLabel" type="Label" parent="CanvasLayer"]
+margin_left = 382.171
+margin_top = 4.96121
+margin_right = 634.171
+margin_bottom = 34.9612
+rect_pivot_offset = Vector2( 58.5129, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "Paradis : 0/10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnferLabel" type="Label" parent="CanvasLayer"]
+margin_left = 5.35851
+margin_top = 5.26205
+margin_right = 221.359
+margin_bottom = 35.262
+rect_pivot_offset = Vector2( 58.5129, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "Enfer : 0/10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReplayLabel" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = 127.206
+margin_top = 176.041
+margin_right = 559.206
+margin_bottom = 295.041
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.0666667, 0.0509804, 0.0509804, 1 )
+text = "Pressez \"R\" pour rejouer"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enfer" type="Sprite" parent="."]
+visible = false
+position = Vector2( 304.143, 162.675 )
+scale = Vector2( 0.344203, 0.471675 )
+texture = ExtResource( 8 )
+
+[node name="paradis" type="Sprite" parent="."]
+visible = false
+position = Vector2( 319.137, 159.984 )
+scale = Vector2( 0.329286, 0.469712 )
+texture = ExtResource( 9 )
+
+[connection signal="timeout" from="ItemTimer" to="." method="_on_ItemTimer_timeout"]
